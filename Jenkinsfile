@@ -1,5 +1,4 @@
-pipeline {
-  agents any
+node {
 	  stage('SCM Checkout') {		
 		  echo 'checkout stage started'
 		  git 'https://github.com/edureka27/maven'
