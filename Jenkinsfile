@@ -1,19 +1,18 @@
-node {
-	  stage('SCM Checkout') {		
-		  echo 'checkout stage started'
-		  git 'https://github.com/edureka27/maven'
-		  echo 'checkout stage completed'			
-	  }
-	  stage('Compile Stage') {		
-		  echo 'compile stage started'
-		  def MAVEN_HOME = tool name: 'Maven', type: 'maven'
-		  bat "${MAVEN_HOME}/bin/mvn clean compile"
-		  echo 'compile stage completed'			
-	  }
-	  stage('Test Stage') {		
-		  echo 'test stage started'
-		  def MAVEN_HOME = tool name: 'Maven', type: 'maven'
-		  bat "${MAVEN_HOME}/bin/mvn test"
-		  echo 'test stage completed'			
-	  }
+pipeline {
+    agent any
+    environment{
+        PATH = "C:/Program Files/apache-maven-3.8.6/bin/mvn:$PATH"
+    }
+    stages {
+        stage("build code") {
+            steps{
+                bat "mvn clean compile"
+            }
+        }
+        stage("Test code") {
+            steps{
+                bat "mvn test"
+            }
+        }
+    }
 }
